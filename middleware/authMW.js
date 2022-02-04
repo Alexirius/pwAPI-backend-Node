@@ -11,6 +11,6 @@ module.exports = function(req, res, next) {
         req.user = decoded;
         next();
     } catch (error) {
-        return next(ApiError.unauthorized(error.message));
+        return next(ApiError.Unauthorized(error.message));
     }
 }

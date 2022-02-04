@@ -40,15 +40,15 @@ class ProtectedService {
 
     async createTransaction(id, name, amount) {
         if (!amount) {
-            return next(ApiError.badRequest('Amount is not specified'));
+            throw ApiError.BadRequest('Amount is not specified');
         };
         const user = await User.findOne({where: {id}});
         if (amount > user.balance) {
-            return next(ApiError.badRequest('Balance exceeded'));
+            throw ApiError.BadRequest('Balance exceeded');
         };
         const recipient = await User.findOne({where: {username: name}});
         if (!recipient) {
-            return next(ApiError.badRequest('User not found'));
+            throw ApiError.BadRequest('User not found');
         };
         const transaction = await Transaction.create({
             fromUserId: user.id,

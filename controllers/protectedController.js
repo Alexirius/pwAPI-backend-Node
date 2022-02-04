@@ -1,5 +1,4 @@
 const protectedService = require('../services/protectedService');
-const ApiError = require("../error/ApiError");
 
 class ProtectedController {
 
