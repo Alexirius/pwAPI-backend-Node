@@ -42,6 +42,9 @@ class ProtectedService {
         if (!amount) {
             throw ApiError.BadRequest('Amount is not specified');
         };
+        if (amount <= 0) {
+            throw ApiError.BadRequest('Invalid amount');
+        };
         const user = await User.findOne({where: {id}});
         if (amount > user.balance) {
             throw ApiError.BadRequest('Balance exceeded');
@@ -50,6 +53,9 @@ class ProtectedService {
         if (!recipient) {
             throw ApiError.BadRequest('User not found');
         };
+        if (user.id === recipient.id) {
+            throw ApiError.BadRequest('Invalid user');
+        }
         const transaction = await Transaction.create({
             fromUserId: user.id,
             toUserId: recipient.id,
