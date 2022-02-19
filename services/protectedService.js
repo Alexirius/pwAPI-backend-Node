@@ -74,7 +74,7 @@ class ProtectedService {
             date: transaction.createdAt,
             username: recipient.username,
             amount: -amount,
-            balance: recipient.balance - amount}};
+            balance: user.balance - amount}};
     }
 }
 
